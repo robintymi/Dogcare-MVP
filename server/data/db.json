@@ -1,0 +1,26 @@
+{
+    "dogs": [],
+    "exercises": [{
+        "id": 1,
+        "name": "Sitz",
+        "description": "Der Hund soll sich auf Kommando hinsetzen.",
+  
+    },
+    {
+        "id": 2,
+        "name": "Platz",
+        "description": "Der Hund soll sich auf Kommando hinlegen.",
+       
+    },
+    {
+        "id": 3,
+        "name": "Bleib",
+        "description": "Der Hund soll an Ort und Stelle bleiben, bis er ein anderes Kommando erhält.",
+        
+    }],
+    "trainingPlans": [],
+    "counter": {
+        "dogs": 0,
+        "trainingPlans": 0
+    }
+}
