@@ -46,31 +46,30 @@ function NewDog() {
       </div>
       <form action="" onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
-        <input value={formData.name} type="text" onChange={handleChange} id="name" />
-
+        <input value={formData.name} type="text" onChange={handleChange} id="name"  name="name"/>
         <label htmlFor="age">Alter</label>
-        <input value={formData.age} type="number" onChange={handleChange} id="age" />
+        <input value={formData.age} type="number" onChange={handleChange} id="age" name="age" />
         <label htmlFor="breed">Rasse</label>
-        <input value={formData.breed} type="text" onChange={handleChange} id="breed" />
+        <input value={formData.breed} type="text" onChange={handleChange} id="breed" name="breed" />
         <label htmlFor="gender">Geschlecht</label>
-        <select name="gender" id="gender" onChange={handleChange}>
+        <select name="gender" id="gender" onChange={handleChange} name="gender">
           <option value="male">Männlich</option>
           <option value="female">Weiblich</option>
         </select>
         <label htmlFor="food">Ernährung</label>
-        <select name="food" id="food" onChange={handleChange}>
+        <select name="food" id="food" onChange={handleChange} name="food">
           <option value="standard">Trocken</option>
           <option value="premium">Feucht</option>
           <option value="vegan">gemischt</option>
           <option value="barf">Barf</option>
         </select>
         <label htmlFor="health">Gesund?</label>
-        <select name="health" id="health" onChange={handleChange}>
+        <select name="health" id="health" onChange={handleChange} name="health">
           <option value="yes">Ja</option>
           <option value="no">Nein</option>
         </select>
         <label htmlFor="dailyRoutine">Tagesablauf</label>
-        <input value={formData.dailyRoutine} type="text" onChange={handleChange} id="dailyRoutine" />
+        <input value={formData.dailyRoutine} type="text" onChange={handleChange} id="dailyRoutine" name="dailyRoutine" />
         <button type="submit">Hund anlegen</button>
       </form>
     </section>
