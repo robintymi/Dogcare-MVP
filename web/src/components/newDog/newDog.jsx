@@ -1,44 +1,80 @@
-import "./newDog.css"
+import "./newDog.css";
+import { useState } from "react";
 
 function NewDog() {
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    breed: "",
+    gender: "",
+    food: "",
+    health: "",
+    dailyRoutine: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/dogs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
   return (
     // das hier ist eine form
-   <section>
-    <div className="new-dog-header">
+    <section>
+      <div className="new-dog-header">
         <h2>Hund anlegen</h2>
         <p>Stammdaten</p>
-    </div>
-    <form action="">
-        <label >Name</label>
-        <input type="text" />
-        <label >Alter</label>
-        <input type="number" />
-        <label >Rasse</label>
-        <input type="text" />
-        <label htmlFor="">Geschlecht</label>
-        <select name="gender" id="gender">
-            <option value="male">Männlich</option>
-            <option value="female">Weiblich</option>
-        </select>
-        <label htmlFor="">Ernährung</label>
-        <select name="food" id="food">
-            <option value="standard">Trocken</option>
-            <option value="premium">Feucht</option>
-            <option value="vegan">gemischt</option>
-            <option value="barf">Barf</option>
-        </select>
-    <label htmlFor="">Gesund?</label>
-        <select name="health" id="health">
-            <option value="yes">Ja</option>
-            <option value="no">Nein</option>
-        </select>
-        <label htmlFor="">Tagesablauf</label>
-        <input type="text" />
-        <button type="submit">Hund anlegen</button>
-    </form>
+      </div>
+      <form action="" onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <input value={formData.name} type="text" onChange={handleChange} id="name" />
 
-   </section>
-  )
+        <label htmlFor="age">Alter</label>
+        <input value={formData.age} type="number" onChange={handleChange} id="age" />
+        <label htmlFor="breed">Rasse</label>
+        <input value={formData.breed} type="text" onChange={handleChange} id="breed" />
+        <label htmlFor="gender">Geschlecht</label>
+        <select name="gender" id="gender" onChange={handleChange}>
+          <option value="male">Männlich</option>
+          <option value="female">Weiblich</option>
+        </select>
+        <label htmlFor="food">Ernährung</label>
+        <select name="food" id="food" onChange={handleChange}>
+          <option value="standard">Trocken</option>
+          <option value="premium">Feucht</option>
+          <option value="vegan">gemischt</option>
+          <option value="barf">Barf</option>
+        </select>
+        <label htmlFor="health">Gesund?</label>
+        <select name="health" id="health" onChange={handleChange}>
+          <option value="yes">Ja</option>
+          <option value="no">Nein</option>
+        </select>
+        <label htmlFor="dailyRoutine">Tagesablauf</label>
+        <input value={formData.dailyRoutine} type="text" onChange={handleChange} id="dailyRoutine" />
+        <button type="submit">Hund anlegen</button>
+      </form>
+    </section>
+  );
 }
 
-export default NewDog
+export default NewDog;
