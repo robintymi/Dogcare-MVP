@@ -1,8 +1,10 @@
 import express from "express";
 import pool from "./db.js";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 app.get("/db-test", async (req, res) => {
@@ -30,13 +32,20 @@ app.post("/dogs", async (req, res) => {
 
   try {
     const result = await pool.query(
-      "INSERT INTO dogs (name, age, breed, gender, food, health, daily_routine) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [name, age, breed, gender, food, health, dailyRoutine]
+      `INSERT INTO dogs (name, age, breed, gender, food, health, daily_routine)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING *`,
+      [name, Number(age), breed, gender, food, health, dailyRoutine]
     );
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Database insert failed" });
+    console.error("DB INSERT ERROR:", err); // <-- das zeigt dir ALLES im Terminal
+    res.status(500).json({
+      message: err.message,
+      detail: err.detail,
+      code: err.code,
+    });
   }
 });
 
