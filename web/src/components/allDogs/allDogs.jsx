@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-function CreateDog() {}
-
 function AllDogs() {
   const [dogs, setDogs] = useState([]);
 
@@ -18,36 +16,27 @@ function AllDogs() {
       console.error("Error fetching dogs:", error);
     }
   };
-
-  return (
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Breed</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Health</th>
-            <th>Food</th>
-            <th>Daily Routine</th>
+  // get dogs from pgadmin and display in table
+  return <section>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Breed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dogs.map((dog) => (
+          <tr key={dog.id}>
+            <td>{dog.id}</td>
+            <td>{dog.name}</td>
+            <td>{dog.breed}</td>
           </tr>
-        </thead>
-        <tbody>
-          {dogs.map((dog) => (
-            <tr key={dog.id}>
-              <td>{dog.name}</td>
-              <td>{dog.breed}</td>
-              <td>{dog.age}</td>
-              <td>{dog.gender}</td>
-              <td>{dog.health}</td>
-              <td>{dog.food}</td>
-              <td>{dog.daily_routine}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  );
+        ))}
+      </tbody>
+    </table>
+  </section>
 }
+
 export default AllDogs;
